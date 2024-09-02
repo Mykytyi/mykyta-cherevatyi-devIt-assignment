@@ -1,0 +1,11 @@
+{
+  "name": "mykyta-cherevatyi-dev-it-assignment",
+  "version": "1.0.0",
+  "description": "FE & BE bundler",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up"
+  },
+  "author": "Nik",
+  "license": "ISC"
+}
