@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { Worker } = require('worker_threads');
 const ClientRoute = require('./routes/client.route');
 const ErrorHandler = require('./utils/errorHandler');
 
@@ -18,6 +19,8 @@ app.use(ClientRoute);
 
 app.use(ErrorHandler.handle);
 
-app.listen(port, () =>
-  console.log(`Server running on port ${port}, http://localhost:${port}`)
+app.listen(port, () => {
+    console.log(`Server running on port ${port}, http://localhost:${port}`);
+  }
 );
+

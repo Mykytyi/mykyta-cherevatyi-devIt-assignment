@@ -7,7 +7,7 @@ const List = ({ data }) => {
     <div className="CustomList">
       <ul>
         {data.map((item, index) => (
-          <ListItem value={item.data} key={JSON.stringify(item)} />
+          <ListItem value={item?.data} key={index} />
         ))}
       </ul>
     </div>
