@@ -1,28 +1,26 @@
 import { startAction } from '../api/mainApi';
 
-// Fetch function with concurrency control
-async function fetchWithConcurrency(urls, concurrency, updateResults) {
-  const results = []; // Store results here
-  const queue = []; // Manage active fetches
+async function fetchWithConcurrency(requests, concurrency, updateResults) {
+  const results = [];
+  const queue = []; // To manage active fetches
 
-  // Function to handle single fetch and update state
-  async function handleFetch(urlEntity, index) {
+
+  async function handleFetch(request, index) {
     try {
-      results[index] = await startAction(urlEntity.data); // Store result at the correct index
+      results[index] = await startAction(request.data);
     } catch (error) {
       console.error(`Error fetching:`, error);
-      results[index] = null; // Handle fetch failure
+      results[index] = null
     }
-    console.log('reaults: ', results);
-    updateResults([...results]); // Update React state
+    updateResults([...results]);
   }
 
-  // Loop through the URLs, but limit active fetches by 'concurrency'
-  for (let i = 0; i < urls.length; i += +concurrency) {
-    const batch = urls.slice(i, i + +concurrency); // Create a batch based on concurrency
-    const batchPromises = batch.map((url, index) => handleFetch(url, i + index)); // Handle fetches and index offset
+  // Go through the URLs, and limit active fetches by 'concurrency'
+  for (let i = 0; i < requests.length; i += +concurrency) {
+    const batch = requests.slice(i, i + +concurrency); // Creating a batch based on concurrency
+    const batchPromises = batch.map((request, index) => handleFetch(request, i + index));
 
-    queue.push(Promise.all(batchPromises)); // Add batch to the queue
+    queue.push(Promise.all(batchPromises)); // Adding batch to the queue
 
     // Ensure that the number of active fetches is controlled by concurrency
     if (queue.length >= concurrency) {
@@ -31,7 +29,6 @@ async function fetchWithConcurrency(urls, concurrency, updateResults) {
     }
   }
 
-  // Await the rest of the requests in the queue
   await Promise.all(queue);
 }
 
