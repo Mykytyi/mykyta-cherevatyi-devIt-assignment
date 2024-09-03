@@ -1,0 +1,7 @@
+.CustomList ul {
+  display: flex;
+  flex-direction: column;
+  max-height: 1400px;
+  flex-wrap: wrap;
+  overflow: auto;
+}

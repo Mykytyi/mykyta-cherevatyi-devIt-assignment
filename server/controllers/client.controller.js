@@ -1,4 +1,4 @@
-const { getRandomDelay } = require('../utils/getRandomDelay');
+const getRandomDelay = require('../utils/getRandomDelay');
 
 class ClientController {
   async start(req, res, next) {
@@ -8,7 +8,7 @@ class ClientController {
     setTimeout(() => {
       res
         .status(200)
-        .json({ message: `Got index: ${index}` });
+        .json({ data: index });
     }, delay);
   }
 }

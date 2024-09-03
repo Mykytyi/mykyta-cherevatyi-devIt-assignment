@@ -1,0 +1,29 @@
+.CustomInput {
+  display: flex;
+  align-items: center;
+  position: relative;
+  max-width: 100%;
+}
+
+.CustomInput .Input {
+  font-size: 18px;
+  padding: 6px 20px;
+  min-width: 280px;
+  outline: none;
+  background: #FFFFFF;
+  color: #000000;
+  border: 1px solid #C4D1EB;
+  border-radius: 5px;
+  box-shadow: 3px 3px 2px 0px #E2E2E2;
+  transition: .3s ease;
+}
+
+.CustomInput .Input:focus {
+  background: #F2F2F2;
+  border: 1px solid #5A7EC7;
+  border-radius: 8px;
+}
+
+.CustomInput .Input::placeholder {
+  color: #afafaf;
+}

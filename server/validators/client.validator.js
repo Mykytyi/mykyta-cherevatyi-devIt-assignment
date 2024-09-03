@@ -6,6 +6,7 @@ class ClientValidator {
   async start(req, res, next) {
     try {
       const { index } = req.body;
+
       if (!index) {
         next('Index was not provided');
       }
@@ -16,6 +17,9 @@ class ClientValidator {
       if (!requestCounts[userIP]) {
         requestCounts[userIP] = [];
       }
+
+      console.log('Index: ', index);
+      console.log('requestCounts: ', requestCounts[req.ip].length);
 
       // Filter out requests older than the time window
       requestCounts[userIP] = requestCounts[userIP].filter(
